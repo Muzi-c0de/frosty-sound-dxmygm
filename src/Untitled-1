@@ -1,0 +1,41 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+export default function NetballPage() {
+  const [tab, setTab] = useState("fixtures");
+
+  const fixtures = [
+    { id: 1, teams: "Team X vs Team Y", time: "11:00 AM" },
+    { id: 2, teams: "Team W vs Team Z", time: "01:00 PM" }
+  ];
+
+  const results = [
+    { id: 1, teams: "Team X vs Team Y", score: "25 - 20" },
+    { id: 2, teams: "Team W vs Team Z", score: "18 - 22" }
+  ];
+
+  return (
+    <div style={{ padding: "20px", textAlign: "center", color: "#fff", backgroundColor: "#1a1a1a", minHeight: "100vh" }}>
+      <h1>Netball Fixtures & Results</h1>
+      <nav><Link to="/">🏠 Home</Link></nav>
+      <div>
+        <button onClick={() => setTab("fixtures")}>Fixtures</button>
+        <button onClick={() => setTab("results")}>Results</button>
+      </div>
+      {tab === "fixtures" &&
+        fixtures.map((match) => (
+          <div key={match.id} style={{ border: "1px solid white", padding: "10px", margin: "10px" }}>
+            <p>{match.teams}</p>
+            <p>{match.time}</p>
+          </div>
+        ))}
+      {tab === "results" &&
+        results.map((match) => (
+          <div key={match.id} style={{ border: "1px solid white", padding: "10px", margin: "10px" }}>
+            <p>{match.teams}</p>
+            <p>Score: {match.score}</p>
+          </div>
+        ))}
+    </div>
+  );
+}
